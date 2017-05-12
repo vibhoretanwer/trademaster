@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.UI", "TradeMaster.UI\TradeMaster.UI.csproj", "{815022C3-E59A-43A0-9F06-1ABBC46E707B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.Entities", "TradeMaster.Entities\TradeMaster.Entities.csproj", "{AC17E121-E77E-4F27-9142-CCAA1B5FFB66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.Common", "TradeMaster.Common\TradeMaster.Common.csproj", "{5FA4A50E-5467-4370-9D3B-90A63983BE7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.AI", "TradeMaster.AI\TradeMaster.AI.csproj", "{FDE94716-FBE5-4397-AD94-F8A14086A8A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.Infrastructure", "TradeMaster.Infrastructure\TradeMaster.Infrastructure.csproj", "{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{815022C3-E59A-43A0-9F06-1ABBC46E707B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815022C3-E59A-43A0-9F06-1ABBC46E707B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815022C3-E59A-43A0-9F06-1ABBC46E707B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815022C3-E59A-43A0-9F06-1ABBC46E707B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC17E121-E77E-4F27-9142-CCAA1B5FFB66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC17E121-E77E-4F27-9142-CCAA1B5FFB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC17E121-E77E-4F27-9142-CCAA1B5FFB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC17E121-E77E-4F27-9142-CCAA1B5FFB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA4A50E-5467-4370-9D3B-90A63983BE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA4A50E-5467-4370-9D3B-90A63983BE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA4A50E-5467-4370-9D3B-90A63983BE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA4A50E-5467-4370-9D3B-90A63983BE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE94716-FBE5-4397-AD94-F8A14086A8A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE94716-FBE5-4397-AD94-F8A14086A8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE94716-FBE5-4397-AD94-F8A14086A8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE94716-FBE5-4397-AD94-F8A14086A8A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
