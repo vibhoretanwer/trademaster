@@ -77,6 +77,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,6 +104,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TradeMaster.Entities\TradeMaster.Entities.csproj">
+      <Project>{ac17e121-e77e-4f27-9142-ccaa1b5ffb66}</Project>
+      <Name>TradeMaster.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TradeMaster.MarketManager\TradeMaster.MarketManager.csproj">
+      <Project>{45671825-9908-477b-9785-8b32e6f8c890}</Project>
+      <Name>TradeMaster.MarketManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

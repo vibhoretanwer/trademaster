@@ -13,6 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.AI", "TradeMast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.Infrastructure", "TradeMaster.Infrastructure\TradeMaster.Infrastructure.csproj", "{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.MarketService", "TradeMaster.MarketService\TradeMaster.MarketService.csproj", "{B7CB4567-5CE7-4829-8BC7-6DC433643133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeMaster.MarketManager", "TradeMaster.MarketManager\TradeMaster.MarketManager.csproj", "{45671825-9908-477B-9785-8B32E6F8C890}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7CB4567-5CE7-4829-8BC7-6DC433643133} = {B7CB4567-5CE7-4829-8BC7-6DC433643133}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +46,14 @@ Global
 		{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{217B71F8-9F24-4E63-AF3D-2F3BC2D284EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7CB4567-5CE7-4829-8BC7-6DC433643133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CB4567-5CE7-4829-8BC7-6DC433643133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CB4567-5CE7-4829-8BC7-6DC433643133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CB4567-5CE7-4829-8BC7-6DC433643133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45671825-9908-477B-9785-8B32E6F8C890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45671825-9908-477B-9785-8B32E6F8C890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45671825-9908-477B-9785-8B32E6F8C890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45671825-9908-477B-9785-8B32E6F8C890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

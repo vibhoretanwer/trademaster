@@ -53,6 +53,7 @@
     <Compile Include="Enums\OrderValidity.cs" />
     <Compile Include="Enums\ProductType.cs" />
     <Compile Include="Enums\TransactionType.cs" />
+    <Compile Include="Enums\Trend.cs" />
     <Compile Include="Helpers\HttpOperations.cs" />
     <Compile Include="Helpers\NestedJSONConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

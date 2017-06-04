@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="34f6319a-e2f5-4f23-b056-e406837bfb6c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/Market/QuotesService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="eb7faba5-9e9d-4fc5-97fe-064a9cbac88a" SourceId="1" SourceUrl="http://localhost/Market/QuotesService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0b254311-127c-44c1-81fc-039743cde72e" SourceId="1" SourceUrl="http://localhost/Market/QuotesService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="28b13d5e-ec9e-4f41-8341-67a50efd21c2" SourceId="1" SourceUrl="http://localhost/Market/QuotesService/mex" />
+    <MetadataFile FileName="TradeMaster.Entities.xsd" MetadataType="Schema" ID="52c1677a-2390-450d-9cd6-c991f28d2380" SourceId="1" SourceUrl="http://localhost/Market/QuotesService/mex" />
+    <MetadataFile FileName="TradeMaster.Common.xsd" MetadataType="Schema" ID="c68f78b8-495c-47bc-a669-f16106bf4f05" SourceId="1" SourceUrl="http://localhost/Market/QuotesService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

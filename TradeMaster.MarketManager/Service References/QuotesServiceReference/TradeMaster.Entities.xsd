@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/TradeMaster.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/TradeMaster.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/TradeMaster.Common" />
+  <xs:complexType name="ArrayOfOHLC">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OHLC" nillable="true" type="tns:OHLC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOHLC" nillable="true" type="tns:ArrayOfOHLC" />
+  <xs:complexType name="OHLC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Close" type="xs:double" />
+      <xs:element minOccurs="0" name="High" type="xs:double" />
+      <xs:element minOccurs="0" name="Low" type="xs:double" />
+      <xs:element minOccurs="0" name="Open" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OHLC" nillable="true" type="tns:OHLC" />
+  <xs:complexType name="ArrayOfTradeSignal">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TradeSignal" nillable="true" type="tns:TradeSignal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTradeSignal" nillable="true" type="tns:ArrayOfTradeSignal" />
+  <xs:complexType name="TradeSignal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TradeMaster.Common" minOccurs="0" name="Type" type="q1:TransactionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TradeSignal" nillable="true" type="tns:TradeSignal" />
+</xs:schema>

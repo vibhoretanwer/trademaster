@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding Quotes}" Grid.Column="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="High" DisplayMemberBinding="{Binding High}"/>
+                    <GridViewColumn Header="Low" DisplayMemberBinding="{Binding Low}"/>
+                    <GridViewColumn Header="Open" DisplayMemberBinding="{Binding Open}"/>
+                    <GridViewColumn Header="Close" DisplayMemberBinding="{Binding Close}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView ItemsSource="{Binding TradeSignals}" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
