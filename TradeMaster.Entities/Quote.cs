@@ -12,21 +12,21 @@ namespace TradeMaster.Entities
 
         public string Symbol { get; set; }
 
-        public float LTP { get; set; }
+        public double LTP { get; set; }
 
-        public float ChangePercentage { get; set; }
+        public double ChangePercentage { get; set; }
 
-        public float Change { get; set; }
+        public double Change { get; set; }
 
-        public int Volume { get; set; }
+        public long Volume { get; set; }
 
-        public int BuyQuantity { get; set; }
+        public long BuyQuantity { get; set; }
 
-        public int SellQuantity { get; set; }
+        public long SellQuantity { get; set; }
 
-        public float OpenInterest { get; set; }
+        public double OpenInterest { get; set; }
 
-        public int LastTradedQuantity { get; set; }
+        public long LastTradedQuantity { get; set; }
 
         public OHLC OHLC { get; set; }
 

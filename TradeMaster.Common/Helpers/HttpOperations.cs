@@ -28,27 +28,27 @@ namespace TradeMaster.Common
         /// <summary>
         /// A dictionary of API Routes that can be accessed
         /// </summary>
-        private readonly Dictionary<string, string> _routes = new Dictionary<string, string>
+        private readonly Dictionary<Route, string> _routes = new Dictionary<Route, string>
         {
-            ["parameters"] = "/parameters",
-            ["api.validate"] = "/session/token",
-            ["api.invalidate"] = "/session/token",
-            ["user.margins"] = "/user/margins/{segment}",
-            ["orders"] = "/orders",
-            ["trades"] = "/trades",
-            ["orders.info"] = "/orders/{order_id}",
-            ["orders.place"] = "/orders/{variety}",
-            ["orders.modify"] = "/orders/{variety}/{order_id}",
-            ["orders.cancel"] = "/orders/{variety}/{order_id}",
-            ["orders.trades"] = "/orders/{order_id}/trades",
-            ["portfolio.positions"] = "/portfolio/positions",
-            ["portfolio.holdings"] = "/portfolio/holdings",
-            ["portfolio.positions.modify"] = "/portfolio/positions",
-            ["market.instruments.all"] = "/instruments",
-            ["market.instruments"] = "/instruments/{exchange}",
-            ["market.quote"] = "/instruments/{exchange}/{tradingsymbol}",
-            ["market.historical"] = "/instruments/historical/{instrument_token}/{interval}",
-            ["market.trigger_range"] = "/instruments/{exchange}/{tradingsymbol}/trigger_range"
+            [Route.PARAMETERS] = "/parameters",
+            [Route.API_VALIDATE] = "/session/token",
+            [Route.API_INVALIDATE] = "/session/token",
+            [Route.USER_MARGINS] = "/user/margins/{segment}",
+            [Route.ORDERS] = "/orders",
+            [Route.TRADES] = "/trades",
+            [Route.ORDERS_INFO] = "/orders/{order_id}",
+            [Route.ORDERS_PLACE] = "/orders/{variety}",
+            [Route.ORDERS_MODIFY] = "/orders/{variety}/{order_id}",
+            [Route.ORDERS_CANCEL] = "/orders/{variety}/{order_id}",
+            [Route.ORDERS_TRADES] = "/orders/{order_id}/trades",
+            [Route.PORTFOLIO_POSITIONS] = "/portfolio/positions",
+            [Route.PORTFOLIO_HOLDINGS] = "/portfolio/holdings",
+            [Route.PORTFOLIO_POSITIONS_MODIFY] = "/portfolio/positions",
+            [Route.MARKET_INSTRUMENTS_ALL] = "/instruments",
+            [Route.MARKET_INSTRUMENTS] = "/instruments/{exchange}",
+            [Route.MARKET_QUOTE] = "/instruments/{exchange}/{tradingsymbol}",
+            [Route.MARKET_HISTORICAL] = "/instruments/historical/{instrument_token}/{interval}",
+            [Route.MARKET_TRIGGER_RANGE] = "/instruments/{exchange}/{tradingsymbol}/trigger_range"
         };
 
         #endregion
@@ -74,32 +74,37 @@ namespace TradeMaster.Common
 
         #region Methods
 
-        public dynamic Get(string route, Dictionary<string, string> param = null)
+        public void SetAccessToken(string accessToken)
+        {
+            this._accessToken = accessToken;
+        }
+
+        public dynamic Get(Route route, Dictionary<string, string> param = null)
         {
             //Alias for sending a GET request
             return Request(route, "GET", param);
         }
 
-        public dynamic Post(string route, Dictionary<string, string> param = null)
+        public dynamic Post(Route route, Dictionary<string, string> param = null)
         {
             //Alias for sending a POST request.
             return Request(route, "POST", param);
         }
 
-        public dynamic Put(string route, Dictionary<string, string> param = null)
+        public dynamic Put(Route route, Dictionary<string, string> param = null)
         {
             //Alias for sending a PUT request.
             return Request(route, "PUT", param);
         }
 
-        public dynamic Delete(string route, Dictionary<string, string> param = null)
+        public dynamic Delete(Route route, Dictionary<string, string> param = null)
         {
             //Alias for sending a DELETE request.
 
             return Request(route, "DELETE", param);
         }
 
-        private dynamic Request(string route, string method, Dictionary<string, string> param = null)
+        private dynamic Request(Route route, string method, Dictionary<string, string> param = null)
         {
             var client = new RestClient(Root);
 

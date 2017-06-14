@@ -6,33 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TradeMaster.Entities;
+using TradeMaster.Infrastructure;
 
 namespace TradeMaster.UI
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ViewModelBase
     {
         private MarketManager.MarketManager _marketManager;
-        public MainWindowViewModel()
-        {
-            Quotes = new ObservableCollection<OHLC>();
-            TradeSignals = new ObservableCollection<TradeSignal>();
+        public MainWindowViewModel(string requestToken)
+        {            
+            MarketConnectionManager mgr = AuthenticationManager.Authenticate(AuthenticationManager.APIKey, AuthenticationManager.Apisecret);
+            //mgr.StoreInstruments(@"D:\Instruments.txt", null);
 
-            _marketManager = new MarketManager.MarketManager();
-            _marketManager.Start();
-
-            _marketManager.GetQuotes().ToList().ForEach(x => Quotes.Add(x));
-            _marketManager.GetTradeSignals().ToList().ForEach(x => TradeSignals.Add(x));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public ObservableCollection<OHLC> Quotes { get; set; }
-
-        public ObservableCollection<TradeSignal> TradeSignals { get; set; }
+            Quote quote = mgr.GetQuote("NSE", "INFY");
+        }        
     }
 }

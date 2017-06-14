@@ -27,9 +27,11 @@ namespace TradeMaster.UI
             Loaded += MainWindow_Loaded;
         }
 
+        public string RequestToken { get; set; }
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new MainWindowViewModel();            
+            DataContext = new MainWindowViewModel(RequestToken);            
         }
     }
 }

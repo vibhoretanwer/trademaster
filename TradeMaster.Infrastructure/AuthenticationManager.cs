@@ -8,22 +8,66 @@ namespace TradeMaster.Infrastructure
 {
     public static class AuthenticationManager
     {
-        public static MarketConnectionManager Authenticate(string apiKey, string apisecret)
+        #region Private Members
+
+        private static readonly string rootUrl = "";
+        private static string apiKey = "icgbzpgqrkyhjfq2";
+        private static string apiSecret = "xo9ow8edaa3wgtfqu18tf2n5npnovjt6";
+
+        #endregion
+
+        static AuthenticationManager()
         {
             AppConstants.ApiKey = apiKey;
-            AppConstants.Apisecret = apisecret;
+            AppConstants.Apisecret = apiSecret;
+        }
+
+        #region Properties
+
+        public static string LoginURL
+        {
+            get
+            {
+                return "https://kite.trade/connect/login?api_key=" + apiKey;
+            }
+        }
+
+        public static string APIKey
+        {
+            get
+            {
+                return apiKey;
+            }
+        }
+
+        public static string Apisecret
+        {
+            get
+            {
+                return apiSecret;
+            }
+        }
+
+        public static string AccessToken { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        public static MarketConnectionManager Authenticate(string apiKey, string apisecret)
+        {
+            //AppConstants.ApiKey = apiKey;
+            //AppConstants.Apisecret = apisecret;
             MarketConnectionManager connection = new MarketConnectionManager(apiKey);
-            //LoginForm loginForm = new LoginForm();
-            //loginForm.Url = "https://kite.trade/connect/login?api_key=" + apiKey;
-            //loginForm.ShowDialog();
-            //string token = loginForm.RequestToken;
-            string token = "";
-            dynamic data = DataHelper.Saveaccesstoken(ref connection, token);
+            //string token = AccessToken;
+            dynamic data = DataHelper.Saveaccesstoken(ref connection, AccessToken);
             AppConstants.AccessToken = data["access_token"];
             AppConstants.PublicToken = data["public_token"];
             AppConstants.UserId = data["user_id"];
-            //kitecon.SetAccessToken(AppConstants.AccessToken);
+            connection.SetAccessToken(AppConstants.AccessToken);
             return connection;
         }
+
+        #endregion
     }
 }

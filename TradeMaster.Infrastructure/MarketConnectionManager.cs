@@ -12,7 +12,7 @@ namespace TradeMaster.Infrastructure
     /// <summary>
     /// A Class to manage connection to market.
     /// </summary>
-    public class MarketConnectionManager : ITrade
+    public class MarketConnectionManager : ITrade, IQuote
     {
         #region Constants
 
@@ -25,6 +25,21 @@ namespace TradeMaster.Infrastructure
         /// The login url
         /// </summary>
         private const string Login = "https://kite.trade/connect/login";
+        private const string EXCHANGE = "exchange";
+        private const string TRADING_SYMBOL = "tradingsymbol";
+        private const string LTP = "last_price";
+        private const string BUY_QUANTITY = "buy_quantity";
+        private const string CHANGE = "change";
+        private const string CHANGE_PERCENTAGE = "change_percent";
+        private const string LAST_TRADED_QUANTITY = "last_quantity";
+        private const string OPEN_INTEREST = "open_interest";
+        private const string SELL_QUANTITY = "sell_quantity";
+        private const string VOLUME = "volume";
+        private const string OHLC = "ohlc";
+        private const string OPEN = "open";
+        private const string CLOSE = "close";
+        private const string HIGH = "high";
+        private const string LOW = "low";
 
         #endregion
 
@@ -74,6 +89,40 @@ namespace TradeMaster.Infrastructure
             throw new NotImplementedException();
         }
 
+        public Quote GetQuote(string exchange, string tradingSymbol)
+        {
+            var param = new Dictionary<string, string>
+            {
+                {EXCHANGE, exchange},
+                {TRADING_SYMBOL, tradingSymbol}
+            };
+            var data = _httpOperations.Get(Route.MARKET_QUOTE, param);
+
+            Quote quote = new Quote()
+            {
+                LTP = data[LTP],
+                BuyQuantity = data[BUY_QUANTITY],
+                Change = data[CHANGE],
+                ChangePercentage = data[CHANGE_PERCENTAGE],
+                LastTradedQuantity = data[LAST_TRADED_QUANTITY],                
+                OpenInterest = data[OPEN_INTEREST],
+                SellQuantity = data[SELL_QUANTITY],
+                Symbol = tradingSymbol,
+                Volume = data[VOLUME],
+            };
+
+            var ohlcData = data[OHLC];
+            quote.OHLC = new OHLC()
+            {
+                Open = Convert.ToDouble(ohlcData[OPEN]),
+                Close = Convert.ToDouble(ohlcData[CLOSE]),
+                High = Convert.ToDouble(ohlcData[HIGH]),
+                Low = Convert.ToDouble(ohlcData[LOW]),
+            };
+
+            return quote;
+        }
+
         #endregion
 
         #region Authentication API
@@ -86,6 +135,7 @@ namespace TradeMaster.Infrastructure
         {
             //Set the `access_token` received after a successful authentication."""
             this._accessToken = accessToken;
+            _httpOperations.SetAccessToken(accessToken);
         }
 
         /// <summary>
@@ -133,7 +183,9 @@ namespace TradeMaster.Infrastructure
                 {"request_token", requestToken},
                 {"checksum", checksum}
             };
-            dynamic resp = _httpOperations.Post("api.validate", values);
+
+            //_httpOperations.SetAccessToken(requestToken);
+            dynamic resp = _httpOperations.Post(Route.API_VALIDATE, values);
             if ((resp != null) && resp.ContainsKey("access_token"))
             {
                 SetAccessToken(resp["access_token"]);
@@ -158,7 +210,7 @@ namespace TradeMaster.Infrastructure
             {
                 values.Add("access_token", accessToken);
             }
-            _httpOperations.Delete("api.invalidate", values);
+            _httpOperations.Delete(Route.API_INVALIDATE, values);
         }
 
         /// <summary>
@@ -176,11 +228,11 @@ namespace TradeMaster.Infrastructure
                 if (exchange != null)
                 {
                     var param = new Dictionary<string, string> { ["exchange"] = exchange };
-                    data = _httpOperations.Get("market.instruments", param);
+                    data = _httpOperations.Get(Route.MARKET_INSTRUMENTS, param);
                 }
                 else
                 {
-                    data = _httpOperations.Get("market.instruments.all");
+                    data = _httpOperations.Get(Route.MARKET_INSTRUMENTS_ALL);
                 }
                 writer.Write(data);
             }
