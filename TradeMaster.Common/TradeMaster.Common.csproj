@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Exchange.cs" />
+    <Compile Include="Enums\MovingAverage.cs" />
     <Compile Include="Enums\OrderType.cs" />
     <Compile Include="Enums\OrderValidity.cs" />
     <Compile Include="Enums\ProductType.cs" />

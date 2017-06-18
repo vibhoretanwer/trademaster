@@ -10,7 +10,7 @@ namespace TradeMaster.Infrastructure
     {
         #region Private Members
 
-        private static readonly string rootUrl = "";
+        //private static readonly string rootUrl = "";
         private static string apiKey = "icgbzpgqrkyhjfq2";
         private static string apiSecret = "xo9ow8edaa3wgtfqu18tf2n5npnovjt6";
 

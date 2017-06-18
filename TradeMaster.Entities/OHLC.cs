@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace TradeMaster.Entities
 {
     [DataContract]
-    [DebuggerDisplay("O={Open}, C={Close}, H={High}, L={Low}")]
+    [DebuggerDisplay("O={Open}, H={High}, L={Low}, C={Close}")]
     public class OHLC
     {
         #region Properties

@@ -13,6 +13,7 @@ using TradeMaster.Entities;
 namespace TradeMaster.MarketService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class QuotesService : IQuotesService
     {
         #region Private Members
@@ -21,6 +22,7 @@ namespace TradeMaster.MarketService
         private List<OHLC> _sampleData;
         Analyzer _analyzer;
         private static int _index;
+        private static Object _lock = new Object();
 
         #endregion
 
@@ -30,7 +32,7 @@ namespace TradeMaster.MarketService
         {
             _sampleData = LoadData();
             _analyzer = new Analyzer();
-            //_timer = new Timer(new TimerCallback(CheckQuotes), null, 0, 1);         
+            //_timer = new Timer(new TimerCallback(CheckQuotes), null, 0, 1);
             int count = 0;   
             while(count < _sampleData.Count)
             {
@@ -103,7 +105,10 @@ namespace TradeMaster.MarketService
 
         private void Analyze(OHLC quote)
         {
-            _analyzer.Analyze(quote);
+            lock(_lock)
+            {
+                _analyzer.Analyze(quote);
+            }
         }
 
         public IEnumerable<OHLC> GetQuotes()

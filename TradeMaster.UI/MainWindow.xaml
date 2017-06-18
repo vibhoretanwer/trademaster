@@ -7,9 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
-    </Grid>
-    <!--<Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -30,5 +28,6 @@
                     <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
                 </GridView>
             </ListView.View>
-        </ListView>-->
+        </ListView>
+    </Grid>
 </Window>
