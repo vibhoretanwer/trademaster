@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,11 +28,20 @@ namespace TradeMaster.UI
             Loaded += MainWindow_Loaded;
         }
 
-        public string RequestToken { get; set; }
+        public string AccessToken { get; set; }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new MainWindowViewModel(RequestToken);            
+            //AccessToken = File.ReadAllText(@"D:\accessToken.txt");
+            if (string.IsNullOrEmpty(AccessToken))
+            {
+                new LoginWindow().ShowDialog();
+                this.Close();
+            }
+            //else
+            //{
+            //    DataContext = new MainWindowViewModel(AccessToken);
+            //}
         }
     }
 }

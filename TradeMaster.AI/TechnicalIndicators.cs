@@ -10,115 +10,150 @@ namespace TradeMaster.AI
 {
     public static class TechnicalIndicators
     {
-        public static List<double> CalculateMovingAverage(IEnumerable<double> quotes, int duration, MovingAverage movingAverage = MovingAverage.Simple)
+        public static double? SMA(List<double> values, double newValue, int period)
         {
-            List<double> ma = new List<double>();
+            double? sma = null;
 
-            switch (movingAverage)
+            values.Add(newValue);
+            if (values.Count >= period)
             {
-                case MovingAverage.Simple:
-                    ma = CalculateSimpleMovingAverage(quotes, duration);
-                    break;
-                case MovingAverage.Exponential:
-                    ma = CalculateExponentialMovingAverage(quotes.ToList(), duration);
-                    break;
-            }
-
-            return ma;
-        }
-
-        private static List<double> CalculateSimpleMovingAverage(IEnumerable<double> quotes, int duration)
-        {
-            List<double> sma = new List<double>();
-
-            for (int i = 0; i <= quotes.Count() - duration; ++i)
-            {
-                sma.Add(quotes.Skip(i).Take(duration).Average());
+                sma = values.Skip(values.Count - period).Average();
             }
 
             return sma;
         }
 
-        private static List<double> CalculateExponentialMovingAverage(List<double> quotes, int duration)
+        public static double? EMA(List<double> values, double newValue, int period, double? previousEMA)
         {
-            List<double> ema = new List<double>();
-            double? previousDayEMA = null;
-            double multiplier = 2.0 / (duration + 1);
+            double? ema = null;
 
-            for (int i = 0; i <= quotes.Count() - duration; ++i)
+            values.Add(newValue);
+            if (values.Count >= period)
             {
-                if (previousDayEMA == null)
+                double multiplier = 2.0 / (period + 1);
+                if (previousEMA.HasValue == false)
                 {
-                    previousDayEMA = CalculateSimpleMovingAverage(quotes, duration).FirstOrDefault();
+                    previousEMA = SMA(values, newValue, period);
                 }
-                else
+                if (previousEMA.HasValue == true)
                 {
-                    previousDayEMA = (quotes[duration + i - 1] - previousDayEMA.Value) * multiplier + previousDayEMA.Value;
+                    ema = (newValue - previousEMA.Value) * multiplier + previousEMA.Value;
                 }
-                ema.Add(previousDayEMA.Value);
+                previousEMA = ema;
             }
 
             return ema;
         }
 
-        public static double CalculateExponentialMovingAverage(double previousEMA, double quote, int duration)
-        {
-            double multiplier = 2.0 / (duration + 1);
-            double previousDayEMA = previousEMA;
+            //public static List<double> CalculateMovingAverage(IEnumerable<double> quotes, int duration, MovingAverage movingAverage = MovingAverage.Simple)
+            //{
+            //    List<double> ma = new List<double>();
 
-            double ema = (quote - previousDayEMA) * multiplier + previousDayEMA;
+            //    switch (movingAverage)
+            //    {
+            //        case MovingAverage.Simple:
+            //            ma = CalculateSimpleMovingAverage(quotes, duration);
+            //            break;
+            //        case MovingAverage.Exponential:
+            //            ma = CalculateExponentialMovingAverage(quotes.ToList(), duration);
+            //            break;
+            //    }
 
-            return ema;
+            //    return ma;
+            //}
+
+            //private static List<double> CalculateSimpleMovingAverage(IEnumerable<double> quotes, int duration)
+            //{
+            //    List<double> sma = new List<double>();
+
+            //    for (int i = 0; i <= quotes.Count() - duration; ++i)
+            //    {
+            //        sma.Add(quotes.Skip(i).Take(duration).Average());
+            //    }
+
+            //    return sma;
+            //}
+
+            //private static List<double> CalculateExponentialMovingAverage(List<double> quotes, int duration)
+            //{
+            //    List<double> ema = new List<double>();
+            //    double? previousDayEMA = null;
+            //    double multiplier = 2.0 / (duration + 1);
+
+            //    for (int i = 0; i <= quotes.Count() - duration; ++i)
+            //    {
+            //        if (previousDayEMA == null)
+            //        {
+            //            previousDayEMA = CalculateSimpleMovingAverage(quotes, duration).FirstOrDefault();
+            //        }
+            //        else
+            //        {
+            //            previousDayEMA = (quotes[duration + i - 1] - previousDayEMA.Value) * multiplier + previousDayEMA.Value;
+            //        }
+            //        ema.Add(previousDayEMA.Value);
+            //    }
+
+            //    return ema;
+            //}
+
+            //public static double CalculateExponentialMovingAverage(double previousEMA, double quote, int duration)
+            //{
+            //    double multiplier = 2.0 / (duration + 1);
+            //    double previousDayEMA = previousEMA;
+
+            //    double ema = (quote - previousDayEMA) * multiplier + previousDayEMA;
+
+            //    return ema;
+            //}
+
+            //public static List<double> EMA(List<double> input, int range)
+            //{
+            //    int out1, count;
+            //    double[] emaValues = new double[input.Count];
+            //    TicTacTec.TA.Library.Core.Ema(0, input.Count - 1, input.ToArray(), range, out out1, out count, emaValues);
+
+            //    return new List<double>(emaValues);            
+            //}
+
+            //public static double EMA(double input, double previousDayEMA, int range)
+            //{
+            //    double multiplier = 2.0 / (range + 1);
+            //    double ema = (input - previousDayEMA) * multiplier + previousDayEMA;
+            //    return ema;
+            //}
+
+            //public static List<double> SMA(List<double> input, int range)
+            //{
+            //    int out1, count;
+            //    double[] smaValues = new double[input.Count];
+            //    TicTacTec.TA.Library.Core.Sma(0, input.Count - 1, input.ToArray(), range, out out1, out count, smaValues);
+
+            //    return new List<double>(smaValues);
+            //}
+
+            //public static Trend GetTrend(List<double> input)
+            //{
+            //    Trend trend = Trend.Unknown;
+            //    int upTrend = 0;
+            //    int downTrend = 0;
+
+            //    for (int i = 0; i < input.Count - 1; ++i)
+            //    {
+            //        if (input[i + 1] > input[i])
+            //        {
+            //            upTrend ++;
+            //        }
+            //        if (input[i + 1] < input[i])
+            //        {
+            //            downTrend ++;
+            //        }
+            //    }
+
+            //    if (upTrend > downTrend) trend = Trend.Up;
+            //    if (upTrend < downTrend) trend = Trend.Down;
+            //    if (upTrend == downTrend) trend = Trend.Sideways;
+
+            //    return trend;
+            //}
         }
-
-        //public static List<double> EMA(List<double> input, int range)
-        //{
-        //    int out1, count;
-        //    double[] emaValues = new double[input.Count];
-        //    TicTacTec.TA.Library.Core.Ema(0, input.Count - 1, input.ToArray(), range, out out1, out count, emaValues);
-
-        //    return new List<double>(emaValues);            
-        //}
-
-        //public static double EMA(double input, double previousDayEMA, int range)
-        //{
-        //    double multiplier = 2.0 / (range + 1);
-        //    double ema = (input - previousDayEMA) * multiplier + previousDayEMA;
-        //    return ema;
-        //}
-
-        //public static List<double> SMA(List<double> input, int range)
-        //{
-        //    int out1, count;
-        //    double[] smaValues = new double[input.Count];
-        //    TicTacTec.TA.Library.Core.Sma(0, input.Count - 1, input.ToArray(), range, out out1, out count, smaValues);
-
-        //    return new List<double>(smaValues);
-        //}
-
-        //public static Trend GetTrend(List<double> input)
-        //{
-        //    Trend trend = Trend.Unknown;
-        //    int upTrend = 0;
-        //    int downTrend = 0;
-
-        //    for (int i = 0; i < input.Count - 1; ++i)
-        //    {
-        //        if (input[i + 1] > input[i])
-        //        {
-        //            upTrend ++;
-        //        }
-        //        if (input[i + 1] < input[i])
-        //        {
-        //            downTrend ++;
-        //        }
-        //    }
-
-        //    if (upTrend > downTrend) trend = Trend.Up;
-        //    if (upTrend < downTrend) trend = Trend.Down;
-        //    if (upTrend == downTrend) trend = Trend.Sideways;
-
-        //    return trend;
-        //}
-    }
 }

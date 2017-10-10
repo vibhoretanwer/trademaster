@@ -38,7 +38,8 @@ namespace TradeMaster.MarketManager
 
         public IEnumerable<TradeSignal> GetTradeSignals()
         {
-            return _quotesService.GetTradeSignals();
+            //return _quotesService.GetTradeSignals();
+            return new List<TradeSignal>();
         }
 
         #endregion

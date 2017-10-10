@@ -14,16 +14,26 @@
         <ListView ItemsSource="{Binding Quotes}" Grid.Column="0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="High" DisplayMemberBinding="{Binding High}"/>
-                    <GridViewColumn Header="Low" DisplayMemberBinding="{Binding Low}"/>
-                    <GridViewColumn Header="Open" DisplayMemberBinding="{Binding Open}"/>
-                    <GridViewColumn Header="Close" DisplayMemberBinding="{Binding Close}"/>
+                    <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Symbol}"/>
+                    <GridViewColumn Header="LTP" DisplayMemberBinding="{Binding LTP}"/>
+                    <!--<GridViewColumn Header="High" DisplayMemberBinding="{Binding OHLC.High}"/>
+                    <GridViewColumn Header="Low" DisplayMemberBinding="{Binding OHLC.Low}"/>
+                    <GridViewColumn Header="Open" DisplayMemberBinding="{Binding OHLC.Open}"/>
+                    <GridViewColumn Header="Close" DisplayMemberBinding="{Binding OHLC.Close}"/>-->
+                    <GridViewColumn Header="5 Point EMA" DisplayMemberBinding="{Binding Last5EMA}"/>
+                    <GridViewColumn Header="20 Point EMA" DisplayMemberBinding="{Binding Last20EMA}"/>
+                    <GridViewColumn Header="Volume" DisplayMemberBinding="{Binding Volume}"/>
+                    <GridViewColumn Header="Change" DisplayMemberBinding="{Binding Change}"/>
+                    <GridViewColumn Header="Change %" DisplayMemberBinding="{Binding ChangePercentage, StringFormat={}{0} %}"/>
+                    <GridViewColumn Header="Buy Quantity" DisplayMemberBinding="{Binding BuyQuantity}"/>
+                    <GridViewColumn Header="Sell Quantity" DisplayMemberBinding="{Binding SellQuantity}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <ListView ItemsSource="{Binding TradeSignals}" Grid.Column="1">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Symbol}"/>
                     <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
                     <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
                 </GridView>

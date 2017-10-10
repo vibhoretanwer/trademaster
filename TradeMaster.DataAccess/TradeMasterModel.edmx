@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TradeMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Instruments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="instrument_token" Type="int" Nullable="false" />
+          <Property Name="exchange_token" Type="int" Nullable="false" />
+          <Property Name="tradingsymbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="expiry" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="strike" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="tick_size" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="lot_size" Type="int" Nullable="false" />
+          <Property Name="instrument_type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="segment" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="exchange" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TradeMasterModelStoreContainer">
+          <EntitySet Name="Instruments" EntityType="Self.Instruments" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TradeMasterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Instrument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="instrument_token" Type="Int32" Nullable="false" />
+          <Property Name="exchange_token" Type="Int32" Nullable="false" />
+          <Property Name="tradingsymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="expiry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="strike" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="tick_size" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="lot_size" Type="Int32" Nullable="false" />
+          <Property Name="instrument_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="segment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="exchange" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="TradeMasterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Instruments" EntityType="Self.Instrument" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TradeMasterModelStoreContainer" CdmEntityContainer="TradeMasterEntities">
+          <EntitySetMapping Name="Instruments">
+            <EntityTypeMapping TypeName="TradeMasterModel.Instrument">
+              <MappingFragment StoreEntitySet="Instruments">
+                <ScalarProperty Name="instrument_token" ColumnName="instrument_token" />
+                <ScalarProperty Name="exchange_token" ColumnName="exchange_token" />
+                <ScalarProperty Name="tradingsymbol" ColumnName="tradingsymbol" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_price" ColumnName="last_price" />
+                <ScalarProperty Name="expiry" ColumnName="expiry" />
+                <ScalarProperty Name="strike" ColumnName="strike" />
+                <ScalarProperty Name="tick_size" ColumnName="tick_size" />
+                <ScalarProperty Name="lot_size" ColumnName="lot_size" />
+                <ScalarProperty Name="instrument_type" ColumnName="instrument_type" />
+                <ScalarProperty Name="segment" ColumnName="segment" />
+                <ScalarProperty Name="exchange" ColumnName="exchange" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

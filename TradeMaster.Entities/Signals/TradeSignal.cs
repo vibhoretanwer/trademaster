@@ -16,6 +16,9 @@ namespace TradeMaster.Entities
         #region Properties
 
         [DataMember]
+        public string Symbol { get; set; }
+
+        [DataMember]
         public double Price { get; set; }
 
         [DataMember]

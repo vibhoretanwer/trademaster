@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TradeMaster.Common;
+using TradeMaster.DataAccess;
 using TradeMaster.Entities;
 
 namespace TradeMaster.Infrastructure
@@ -40,6 +41,13 @@ namespace TradeMaster.Infrastructure
         private const string CLOSE = "close";
         private const string HIGH = "high";
         private const string LOW = "low";
+        private const string NAME = "name";
+        private const string EXPIRY = "expiry";
+        private const string STRIKE = "strike";
+        private const string TICK_SIZE = "tick_size";
+        private const string LOT_SIZE = "lot_size";
+        private const string INSTRUMENT_TYPE = "instrument_type";
+        private const string SEGMENT = "segment";        
 
         #endregion
 
@@ -104,7 +112,7 @@ namespace TradeMaster.Infrastructure
                 BuyQuantity = data[BUY_QUANTITY],
                 Change = data[CHANGE],
                 ChangePercentage = data[CHANGE_PERCENTAGE],
-                LastTradedQuantity = data[LAST_TRADED_QUANTITY],                
+                LastTradedQuantity = data[LAST_TRADED_QUANTITY],
                 OpenInterest = data[OPEN_INTEREST],
                 SellQuantity = data[SELL_QUANTITY],
                 Symbol = tradingSymbol,
@@ -234,9 +242,66 @@ namespace TradeMaster.Infrastructure
                 {
                     data = _httpOperations.Get(Route.MARKET_INSTRUMENTS_ALL);
                 }
-                writer.Write(data);
+                //SaveToDB(data.ToString().Split('\r'));
+                //writer.Write(data);
             }
         }        
+
+        private void SaveToDB(string[] data)
+        {
+            TradeMasterEntities dbContext = new TradeMasterEntities();
+            
+            foreach(string dataItem in data.Skip(1))
+            {
+                string[] items = dataItem.TrimStart('\n').Split(',');
+                Instrument instrument = null;
+
+                try
+                {
+                    instrument = new Instrument()
+                    {
+                        instrument_token = Convert.ToInt32(items[0]),
+                        exchange_token = Convert.ToInt32(items[1]),
+                        tradingsymbol = items[2],
+                        name = items[3],             
+                        expiry = items[5],
+                        //strike = Convert.ToDecimal(Convert.ToDouble(items[6])),
+                        tick_size = Convert.ToDecimal(items[7]),
+                        lot_size = Convert.ToInt32(items[8]),
+                        instrument_type = items[9],
+                        segment = items[10],
+                        exchange = items[11],
+                    };
+                }
+                catch(Exception ex)
+                {
+                }
+
+                if (instrument != null)
+                {
+                    decimal lastPrice;
+                    decimal.TryParse(items[4], out lastPrice);
+                    instrument.last_price = lastPrice;
+
+                    decimal strike;
+                    decimal.TryParse(items[6], out strike);
+                    instrument.strike = strike;
+
+                    dbContext.Instruments.Add(instrument);
+                    //dbContext.SaveChanges();
+                    //try
+                    //{
+                    //    dbContext.SaveChanges();
+                    //}
+                    //catch(Exception exx)
+                    //{
+
+                    //}
+                }
+            }
+
+            dbContext.SaveChanges();
+        }
 
         #endregion
 

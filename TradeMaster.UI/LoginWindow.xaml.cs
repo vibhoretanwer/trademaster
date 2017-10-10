@@ -33,13 +33,13 @@ namespace TradeMaster.UI
         private void LoginWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //if (File.Exists(@"D:\accessToken.txt") == false || File.ReadAllText(@"D:\accessToken.txt").Length == 0)
-            {
+            //{
                 webBrowser.Navigate(AuthenticationManager.LoginURL);
-            }
+            //}
             //else
             //{
             //    AuthenticationManager.AccessToken = File.ReadAllText(@"D:\accessToken.txt");
-            //    MainWindow mainWindow = new MainWindow() { RequestToken = AuthenticationManager.AccessToken };
+            //    MainWindow mainWindow = new MainWindow() { AccessToken = AuthenticationManager.AccessToken };
             //    mainWindow.Show();
             //    this.Close();
             //}
@@ -67,8 +67,8 @@ namespace TradeMaster.UI
                     //connection.SetAccessToken(AppConstants.AccessToken);
 
 
-                    //File.WriteAllText(@"D:\accessToken.txt", AuthenticationManager.AccessToken);
-                    MainWindow mainWindow = new MainWindow() { RequestToken = token };
+                    File.WriteAllText(@"D:\accessToken.txt", AuthenticationManager.AccessToken);
+                    MainWindow mainWindow = new MainWindow() { AccessToken = token, DataContext = new MainWindowViewModel(token) };
                     mainWindow.Show();
 
                     this.Close();

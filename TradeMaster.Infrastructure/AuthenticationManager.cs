@@ -56,13 +56,15 @@ namespace TradeMaster.Infrastructure
 
         public static MarketConnectionManager Authenticate(string apiKey, string apisecret)
         {
-            //AppConstants.ApiKey = apiKey;
-            //AppConstants.Apisecret = apisecret;
+            AppConstants.ApiKey = apiKey;
+            AppConstants.Apisecret = apisecret;
             MarketConnectionManager connection = new MarketConnectionManager(apiKey);
-            //string token = AccessToken;
+            string token = AccessToken;
             dynamic data = DataHelper.Saveaccesstoken(ref connection, AccessToken);
-            AppConstants.AccessToken = data["access_token"];
+            AppConstants.AccessToken = data["access_token"]; 
             AppConstants.PublicToken = data["public_token"];
+            //AppConstants.AccessToken = @"reliig4infmf5unpht3626r08k5xpmau"; 
+            //AppConstants.PublicToken = @"24806405c0aa8608666941e5139d8cae";
             AppConstants.UserId = data["user_id"];
             connection.SetAccessToken(AppConstants.AccessToken);
             return connection;

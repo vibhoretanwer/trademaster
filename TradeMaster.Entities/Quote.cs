@@ -30,6 +30,9 @@ namespace TradeMaster.Entities
 
         public OHLC OHLC { get; set; }
 
+        public double Last5EMA { get; set; }
+        public double Last20EMA { get; set; }
+
         #endregion
     }
 }

@@ -105,15 +105,15 @@ namespace TradeMaster.AI
 
         private void CalculateNewEMA(OHLC currentQuote, int duration)
         {
-            if (EMAs[duration].Count == 0)
-            {
-                EMAs[duration].Add(TechnicalIndicators.CalculateMovingAverage(Data.Select(x => x.Close), duration, MovingAverage.Exponential).FirstOrDefault());
-            }
-            else
-            {
-                double previousEMA = EMAs[duration].LastOrDefault();
-                EMAs[duration].Add(TechnicalIndicators.CalculateExponentialMovingAverage(previousEMA, currentQuote.Close, duration));
-            }
+            //if (EMAs[duration].Count == 0)
+            //{
+            //    EMAs[duration].Add(TechnicalIndicators.CalculateMovingAverage(Data.Select(x => x.Close), duration, MovingAverage.Exponential).FirstOrDefault());
+            //}
+            //else
+            //{
+            //    double previousEMA = EMAs[duration].LastOrDefault();
+            //    EMAs[duration].Add(TechnicalIndicators.CalculateExponentialMovingAverage(previousEMA, currentQuote.Close, duration));
+            //}
         }
     }
 }
